@@ -8,16 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
     <title>SB Admin 2 - Tables</title>
 
     <!-- Custom fonts for this template -->
-    <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" type="text/css">
-
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -32,129 +30,107 @@
     <div class="container-fluid">
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
                     <!-- Sidebar Toggle (Topbar) -->
                     <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
                     </form>
-
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <td align="right">신청학점 ( <font color="red"><span id="cdt">15.0</span></font> &nbsp;)&nbsp;&nbsp;&nbsp;OCU신청학점 ( <font color="blue"><span id="ocu">6.0</span></font> &nbsp;)</td>
-                        <!--타이틀-->
-                        </tr>
+                        <td align="right">신청학점 ( <font color="red"><span id="cdt" th:text="${totalCredits}"></span></font>)&nbsp;&nbsp;&nbsp;OCU신청학점 ( <font color="blue"><span id="ocu" th:text="${totalOcuCredits}"></span></font>)</td>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Wishlist</h1>
                     <p class="mb-4"><a target="_blank"></a>.</p>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <!--<h6 class="m-0 font-weight-bold text-primary">우선순위저장</h6>-->
-                            <a href="#" class="btn btn-success btn-icon-split" onclick="sortTable()">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-check"></i>
-                            </span>
-                                <span class="text">우선순위저장</span>
-                            </a>
-                            <a href="#" class="btn btn-secondary btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-arrow-right"></i>
-                                        </span>
+                            <!--<a href="#" th:href="@{/lectures/search}" class="btn btn-secondary btn-icon-split">-->
+                            <a th:href="@{/addwishlist}" class="btn btn-secondary btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
                                 <span class="text">위시리스트 담으러 가기</span>
                             </a>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>NO</th>
-                                        <th>우선순위</th>
-                                        <th>이수구분</th>
-                                        <th>학수번호</th>
-                                        <th>분반</th>
-                                        <th>교과목명</th>
-                                        <th>학점(시간)</th>
-                                        <th>담당교수</th>
-                                        <th>강의시간</th>
-                                        <th>강의계획서</th>
-                                        <th>비고</th>
-                                        <th>삭제</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <input type="number" class="form-control" placeholder="" />
-                                        </td>
-                                        <td>교선</td>
-                                        <td>교선B7065</td>
-                                        <td>01</td>
-                                        <td>배드민턴</td>
-                                        <td>3(3)</td>
-                                        <td>김창선</td>
-                                        <td>동인관b0101 : 화[03/04]</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <input type="number" class="form-control" placeholder="" />
-                                        </td>
-                                        <td>교선</td>
-                                        <td>열린I1090</td>
-                                        <td>01</td>
-                                        <td>뮤지컬영화감상과이해</td>
-                                        <td>3(3)</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <form id="savePrioritiesForm" th:action="@{/wishlist/savePriorities}" method="post">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>NO</th>
+                                            <th>우선순위</th>
+                                            <th>이수구분</th>
+                                            <th>학수번호</th>
+                                            <th>분반</th>
+                                            <th>교과목명</th>
+                                            <th>학점(시간)</th>
+                                            <th>담당교수</th>
+                                            <th>강의시간</th>
+                                            <th>강의계획서</th>
+                                            <th>비고</th>
+                                            <th>삭제</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="wishlist, iterStat : ${lectures}">
+                                            <td th:text="${iterStat.index + 1}"></td>
+                                            <td>
+                                                <input type="number" class="form-control"
+                                                       th:name="${'priority__' + wishlist.id}"
+                                                       th:value="${wishlist.priority}" />
+                                            </td>
+                                            <td th:text="${wishlist.lecture.lectureClassification}"></td>
+                                            <td th:text="${wishlist.lecture.lectureCode}"></td>
+                                            <td th:text="${wishlist.lecture.division}"></td>
+                                            <td th:text="${wishlist.lecture.lectureName}"></td>
+                                            <td th:text="${wishlist.lecture.credit}"></td>
+                                            <td th:text="${wishlist.lecture.professor.name}"></td>
+                                            <td th:text="${wishlist.lecture.lectureDayAndRoom}"></td>
+                                            <td th:text="${wishlist.lecture.syllabus}"></td>
+                                            <td></td>
+                                            <td>
+                                                <!--<form id="deleteForm__${wishlist.id}" th:action="@{/wishlist/delete/{id}(id=${wishlist.id})}" method="post"
+                                                      onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+                                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                    <button type="submit" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>-->
+                                                <a th:href="@{/wishlist/delete/{id}(id=${wishlist.id})}" class="btn btn-danger btn-circle btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-success btn-icon-split" type="submit">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">우선순위저장</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
 
@@ -164,8 +140,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -199,7 +174,85 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-    </th:block>
 
+    <!-- Custom sorting and form handling scripts -->
+    <!--<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Sorting table by priority
+            sortTableByPriority();
 
+            // Handling delete form submissions
+            document.querySelectorAll('form[id^="deleteForm__"]').forEach(form => {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent default form submission
+                    if (confirm('정말로 삭제하시겠습니까?')) {
+                        // Submit the form asynchronously
+                        fetch(form.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                [document.querySelector('meta[name="_csrf_header"]').content]: form.querySelector('input[name="_csrf.parameterName"]').value
+                            },
+                            body: new URLSearchParams(new FormData(form))
+                        })
+                            .then(response => response.text())
+                            .then(result => {
+                                // Refresh the page after successful deletion
+                                location.reload();
+                            })
+                            .catch(error => console.error('Error:', error));
+                    }
+                });
+            });
+
+            // Handling save priorities form (if needed)
+            document.getElementById('savePrioritiesForm').addEventListener('submit', function (event) {
+                // Additional processing for save priorities form, if required
+            });
+        });
+
+        function sortTableByPriority() {
+            var table = document.getElementById("dataTable");
+            var rows = Array.from(table.querySelectorAll("tbody tr"));
+            rows.sort(function (rowA, rowB) {
+                var priorityA = parseInt(rowA.querySelector("input").value) || 0;
+                var priorityB = parseInt(rowB.querySelector("input").value) || 0;
+                return priorityA - priorityB; // Sort in ascending order
+            });
+            rows.forEach(function (row) {
+                table.querySelector("tbody").appendChild(row);
+            });
+        }
+    </script>
+    <script>
+        function deleteItem(itemId) {
+            if (confirm('정말로 삭제하시겠습니까?')) {
+                // CSRF 토큰 가져오기
+                const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
+                // 삭제 요청 보내기
+                fetch(`/delete/${itemId}`, {
+                    method: 'POST',  // POST 메서드 사용
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRF-Token': csrfToken  // CSRF 토큰 헤더에 추가
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // 성공 시 페이지 새로고침
+                            window.location.reload();
+                        } else {
+                            // 실패 시 에러 메시지 표시
+                            alert('삭제 실패');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('삭제 중 오류 발생:', error);
+                        alert('삭제 중 오류 발생');
+                    });
+            }
+        }
+    </script>-->
+</th:block>
 </html>
