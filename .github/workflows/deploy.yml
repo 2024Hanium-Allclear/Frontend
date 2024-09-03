@@ -32,7 +32,7 @@ jobs:
           
 
       - name: SSH to EC2 and run Docker
-        uses: appleboy/ssh-action@v0.1.0
+        uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
@@ -40,5 +40,5 @@ jobs:
           port: 22
           script: |
             cd /home/ubuntu
-            docker-compose down
-            docker-compose up -d
+            sudo docker-compose down
+            sudo docker-compose up -d
