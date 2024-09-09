@@ -1,30 +1,80 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{common/layout}">
+<html lagn="ko">
+
+<!-- 공통 헤더-->
+
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>타이틀</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+        <!-- DataTable -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+    </head>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <title>개설과목 조회</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Index</title>
 </head>
-<body>
-<th:block layout:fragment="content">
-    <div class="container-fluid">
+
+<body id="page-top">
+<div id="wrapper">
+    <!-- 사이드바-->
+    
+
+ 
+    <!-- End of Sidebar -->
+
+
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- 상단바-->
+            
+        
+    
+
+            <!-- 본문-->
+            
+    <!-- Begin Page Content -->
+    <div class="container-fluid" style="display: flex;">
+        <div>
+            <nav class="col-sm-3 sidenav">
+                <!-- Sidebar -->
+            <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+                <img src="/images/logo.gif" width="200px">
+            </ul>
+            </nav>
+            <h4>회원 정보</h4>
+        </div>
         <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Topbar -->
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/board" class="nav-link" aria-current="page">공지사항</a></li>
+                <li class="nav-item"><a href="/lectures/search" class="nav-link">개설교과목조회</a></li>
+                <li class="nav-item"><a href="/wishlist" class="nav-link">위시리스트보기</a></li>
+                <li class="nav-item"><a href="/registration/register" class="nav-link">수강신청</a></li>
+                <li class="nav-item"><a href="/registration/detail" class="nav-link">수강신청결과조회</a></li>
+            </ul>
+    <!-- End of Topbar -->
             <div id="content">
                 <div class="container mt-5">
                     <h2>개설과목 조회</h2>
                     <div class="form-group">
                         <label>검색 유형</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="departmentRadio" name="searchType" value="department" onclick="showFields('department')">
+                            <input class="form-check-input" type="radio" id="departmentRadio" name="searchType" value="department" onclick="showFields('department')" checked>
                             <label class="form-check-label" for="departmentRadio">개설학과</label>
                         </div>
                         <div class="form-check">
@@ -38,8 +88,7 @@
                     </div>
 
                     <div id="departmentFields" class="form-fields">
-                        <form th:action="@{/lectures/search/department}" method="get">
-                            <input type="hidden" name="searchType" value="department"/>
+                        <form id="departmentForm">
                             <div class="form-group">
                                 <label>학과(전공)</label>
                                 <select class="form-control" id="departmentSelect" name="departmentId">
@@ -64,13 +113,12 @@
                                     <option value="">과목 선택</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">검색</button>
+                            <button type="button" class="btn btn-primary" onclick="searchLectures('department')">검색</button>
                         </form>
                     </div>
 
                     <div id="lectureNameFields" class="form-fields" style="display: none;">
-                        <form th:action="@{/lectures/search/keyword}" method="get">
-                            <input type="hidden" name="searchType" value="lectureName"/>
+                        <form id="lectureNameForm">
                             <div class="form-group">
                                 <label for="keywordSelect">검색어</label>
                                 <input type="text" name="keyword" id="keywordSelect" placeholder="Keyword" class="form-control"/>
@@ -81,13 +129,12 @@
                                     <option value="">과목 선택</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">검색</button>
+                            <button type="button" class="btn btn-primary" onclick="searchLectures('lectureName')">검색</button>
                         </form>
                     </div>
 
                     <div id="lectureCodeFields" class="form-fields" style="display: none;">
-                        <form th:action="@{/lectures/search/lectureCode}" method="get">
-                            <input type="hidden" name="searchType" value="lectureCode"/>
+                        <form id="lectureCodeForm">
                             <div class="form-group">
                                 <label for="lectureCode">학수 번호</label>
                                 <input type="text" id="lectureCode" name="lectureCode" placeholder="Lecture Code" class="form-control"/>
@@ -96,11 +143,11 @@
                                 <label for="division">분반</label>
                                 <input type="text" id="division" name="division" placeholder="Division" class="form-control"/>
                             </div>
-                            <button type="submit" class="btn btn-primary">검색</button>
+                            <button type="button" class="btn btn-primary" onclick="searchLectures('lectureCode')">검색</button>
                         </form>
                     </div>
 
-                    <div id="searchResults" th:if="${lectures != null}">
+                    <div id="searchResults" style="display: none;">
                         <h3>검색 결과</h3>
                         <table class="table">
                             <thead>
@@ -111,11 +158,7 @@
                             </tr>
                             </thead>
                             <tbody id="searchResultsBody">
-                            <tr th:each="lecture : ${lectures}">
-                                <td th:text="${lecture.lectureName}"></td>
-                                <td th:text="${lecture.department.name}"></td>
-                                <td th:text="${lecture.grade}"></td>
-                            </tr>
+                            <!-- 검색 결과가 여기 표시됩니다 -->
                             </tbody>
                         </table>
                     </div>
@@ -124,127 +167,42 @@
         </div>
     </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const params = new URLSearchParams(window.location.search);
-        const searchType = params.get('searchType');
+        </div>
+        <!-- 공통 하단-->
+        
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; AllClear 2024</span>
+            </div>
+        </div>
+    </footer>
 
-        if (searchType) {
-            document.getElementById(`${searchType}Radio`).checked = true;
-            showFields(searchType);
-        }
+    </div>
+</div>
 
-        document.querySelector('input[name="keyword"]').value = params.get('keyword') || '';
-        document.querySelector('input[name="lectureCode"]').value = params.get('lectureCode') || '';
-        document.querySelector('input[name="division"]').value = params.get('division') || '';
-        document.getElementById('departmentSelect').value = params.get('departmentId') || '';
-        document.getElementById('gradeSelect').value = params.get('grade') || '';
+<!-- 공통 스크립트-->
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        fetchDepartments();
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        document.getElementById('departmentSelect').addEventListener('change', fetchLectureTitles);
-        document.getElementById('gradeSelect').addEventListener('change', fetchLectureTitles);
-        document.querySelector('input[name="keyword"]').addEventListener('input', fetchLectureTitles);
-    });
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
-    function showFields(fieldType) {
-        const fields = ['departmentFields', 'lectureNameFields', 'lectureCodeFields'];
-        fields.forEach(id => document.getElementById(id).style.display = 'none');
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
 
-        document.getElementById(fieldType + 'Fields').style.display = 'block';
-    }
+    <!--  DataTable  -->
+    <script src="/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-    function fetchDepartments() {
-        fetch('/lectures/api/departments')
-            .then(response => response.json())
-            .then(data => updateDepartments(data))
-            .catch(error => console.error('Error fetching departments:', error));
-    }
-
-    function updateDepartments(departments) {
-        const select = document.getElementById('departmentSelect');
-        select.innerHTML = '<option value="">전체</option>';
-
-        departments.forEach(dept => {
-            const option = document.createElement('option');
-            option.value = dept.id;
-            option.textContent = dept.name;
-            select.appendChild(option);
-        });
-    }
-
-    function fetchLectureTitles() {
-        const departmentId = document.getElementById('departmentSelect').value;
-        const grade = document.getElementById('gradeSelect').value;
-        const keyword = document.querySelector('input[name="keyword"]').value;
-
-        if (departmentId && grade) {
-            fetch(`/lectures/api/titles?departmentId=${encodeURIComponent(departmentId)}&grade=${encodeURIComponent(grade)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const select = document.getElementById('lectureTitleSelect');
-                    select.innerHTML = '<option value="">과목 선택</option>'; // Clear previous options
-                    data.forEach(title => {
-                        const option = document.createElement('option');
-                        option.value = title;
-                        option.text = title;
-                        select.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching lecture titles:', error));
-        }
-        if (keyword) {
-            fetch(`/lectures/api/lectureTitle?keyword=${encodeURIComponent(keyword)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const select = document.getElementById('lectureNameSelect');
-                    select.innerHTML = '<option value="">과목 선택</option>'; // Clear previous options
-                    data.forEach(title => {
-                        const option = document.createElement('option');
-                        option.value = title;
-                        option.text = title;
-                        select.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching lecture titles:', error));
-        }
-
-    }
-
-    function updateLectureTitles(titles) {
-        const select = document.getElementById('lectureTitleSelect');
-        select.innerHTML = '<option value="">과목 선택</option>';
-
-        titles.forEach(title => {
-            const option = document.createElement('option');
-            option.value = title.name;
-            option.textContent = title.name;
-            select.appendChild(option);
-        });
-    }
-
-    function displayResults(results) {
-        const tbody = document.getElementById('searchResultsBody');
-        tbody.innerHTML = '';
-
-        if (results.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="3">검색 결과가 없습니다.</td></tr>';
-        } else {
-            results.forEach(result => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${result.lectureName || ''}</td>
-                    <td>${result.lectureCode || ''}</td>
-                    <td>${result.grade || ''}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        document.getElementById('searchResults').style.display = 'block';
-    }
-</script>
-</th:block>
-
+    <!-- Page level custom scripts -->
+    <!--    <script th:src="@{/js/demo/chart-area-demo.js}"></script>-->
+    <!--    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>-->
 </body>
 </html>
+
+
