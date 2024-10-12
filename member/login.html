@@ -28,22 +28,46 @@
     </style>
     <title>::동덕여자대학교 수강신청 시스템::</title>
     <script type="text/javascript">
-        function validateForm() {
-            var userId = document.forms["form"]["userId"].value;
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            var loginId = document.forms["form"]["loginId"].value;
             var password = document.forms["form"]["passwd"].value;
 
             // Check if ID field is empty
-            if (userId == "") {
+            if (loginId == "") {
                 alert("ID 항목을 입력하셔야 합니다.");
-                return false; // Prevent form submission
+                return false;
             }
 
             // Check if Password field is empty
             if (password == "") {
                 alert("비밀번호 항목을 입력하셔야 합니다.");
-                return false; // Prevent form submission
+                return false;
             }
-            return true;
+
+            try {
+                const response = await fetch('http://localhost:8000/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ loginId, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('accessToken', data.result.accessToken);
+                    localStorage.setItem('refreshToken', data.result.refreshToken);
+                    
+                    window.location.href = './main';
+                } else {
+                    const error = await response.json();
+                    alert(error.message || '로그인에 실패했습니다.');
+                }
+            } catch (error) {
+                alert('서버와 통신 중 오류가 발생했습니다.');
+            }
         }
 
         // Function to show alert if there's an error
@@ -81,14 +105,14 @@
                             </tr>
                         </table>
                         <table width="213" border="0" cellpadding="0" cellspacing="0">
-                            <form name="form" id="form" method="post" action="/login" autocomplete="off" onsubmit="return validateForm()">
+                            <form name="form" id="form" autocomplete="off" onsubmit="handleLogin(event)">
                                 <tr>
                                     <td height="21">&nbsp;</td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td width="130" height="26">
-                                        <input name="userId" alt="ID" type="text" class="form" size="14" maxlength="20" tabindex="1">
+                                        <input name="loginId" alt="ID" type="text" class="form" size="14" maxlength="20" tabindex="1">
                                         <input type="hidden" name="div" value="U">
                                     </td>
                                     <td width="70" rowspan="2">

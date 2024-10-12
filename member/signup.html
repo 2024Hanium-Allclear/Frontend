@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html>
 
 <head>
     <meta http-equiv="Pragma" content="no-cache">
@@ -43,15 +43,15 @@
             padding: 40px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0);
             border-radius: 50px;
-            border: 20px solid #ececec; /* Added thick border with the specified color */
+            border: 20px solid #ececec;
             text-align: center;
         }
 
         .signup-title {
             font-size: 24px;
-            font-weight: bold; /* Made the title bold */
+            font-weight: bold;
             color: #333;
-            margin-bottom: 40px; /* Increased space between title and form */
+            margin-bottom: 40px;
         }
 
         .signup-form {
@@ -64,7 +64,7 @@
         .signup-form input[type="number"] {
             width: 100%;
             padding: 12px;
-            margin-bottom: 20px; /* Increased margin-bottom for better spacing */
+            margin-bottom: 20px;
             border: 1px solid #d8b8c0;
             border-radius: 5px;
             font-size: 14px;
@@ -135,8 +135,7 @@
         <img src="/images/signup_logo.png" alt="동덕여자대학교 로고">
     </div>
     <div class="signup-title">회원가입</div>
-    <form class="signup-form" name="signupForm" id="signupForm" method="post" action="/signup"
-          autocomplete="off" onsubmit="return validateSignupForm()">
+    <form class="signup-form" name="signupForm" id="signupForm" autocomplete="off" onsubmit="handleSignup(event)">
         <input type="text" name="loginId" placeholder="ID" required autocomplete="off">
         <input type="password" name="password" placeholder="비밀번호" required autocomplete="off">
         <input type="text" name="studentIdNumber" placeholder="학번" required autocomplete="off">
@@ -154,13 +153,16 @@
     </form>
 </div>
 
-<script th:inline="javascript">
-    function validateSignupForm() {
+<script>
+    async function handleSignup(event) {
+        event.preventDefault();
+
         var loginId = document.forms["signupForm"]["loginId"].value;
         var password = document.forms["signupForm"]["password"].value;
         var studentIdNumber = document.forms["signupForm"]["studentIdNumber"].value;
         var grade = document.forms["signupForm"]["grade"].value;
 
+        // Validation
         if (loginId == "") {
             alert("ID 항목을 입력하셔야 합니다.");
             return false;
@@ -181,13 +183,33 @@
             return false;
         }
 
-        var result = /*[[${result}]]*/ '';
+        // Data to send
+        var data = {
+            loginId: loginId,
+            password: password,
+            studentIdNumber: studentIdNumber,
+            grade: grade
+        };
 
-        if (result) {
-            alert(result);
+        try {
+            const response = await fetch('http://localhost:8000/api/users/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('회원가입이 성공적으로 완료되었습니다.');
+                window.location.href = 'login.html'; 
+            } else {
+                const error = await response.json();
+                alert(error.message || '회원가입에 실패했습니다.');
+            }
+        } catch (error) {
+            alert('서버와 통신 중 오류가 발생했습니다.');
         }
-
-        return true;
     }
 </script>
 
