@@ -40,7 +40,6 @@
                 return false;
             }
 
-            // Check if Password field is empty
             if (password == "") {
                 alert("비밀번호 항목을 입력하셔야 합니다.");
                 return false;
@@ -59,8 +58,8 @@
                     const data = await response.json();
                     localStorage.setItem('accessToken', data.result.accessToken);
                     localStorage.setItem('refreshToken', data.result.refreshToken);
-                    
-                    window.location.href = './main';
+                    console.log(localStorage.getItem("accessToken"))
+                   window.location.href = '../main/index.html';
                 } else {
                     const error = await response.json();
                     alert(error.message || '로그인에 실패했습니다.');
