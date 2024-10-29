@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lagn="ko">
+
+<!-- 공통 헤더-->
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>타이틀</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/queue.css" rel="stylesheet" />
+
+    <!-- DataTable -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Index</title>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <!-- 사이드바-->
+
+
+
+    <!-- End of Sidebar -->
+
+
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- 상단바-->
+
+
+
+
+            <!-- 본문-->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid" style="display: flex;">
+                <div>
+                    <nav class="col-sm-3 sidenav">
+                        <!-- Sidebar -->
+                        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+                            <img src="/images/logo.gif" width="200px">
+                        </ul>
+                    </nav>
+                    <h4>회원 정보</h4>
+                </div>
+                <div id="content-wrapper" class="d-flex flex-column">
+                    <!-- Topbar -->
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a href="/board" class="nav-link" aria-current="page">공지사항</a></li>
+                        <li class="nav-item"><a href="/lectures/search" class="nav-link">개설교과목조회</a></li>
+                        <li class="nav-item"><a href="/wishlist" class="nav-link">위시리스트보기</a></li>
+                        <li class="nav-item"><a href="/registration/register" class="nav-link">수강신청</a></li>
+                        <li class="nav-item"><a href="/registration/detail" class="nav-link">수강신청결과조회</a></li>
+                    </ul>
+                    <!-- End of Topbar -->
+                    <div id="content">
+                        <div class="container mt-5">
+
+                            <!-- Begin Page Content -->
+                            <div class="container-fluid">
+                                공지사항
+
+                            </div>
+                            <!-- /.container-fluid -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- 공통 하단-->
+
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; AllClear 2024</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+<div class="overlay">
+    <div class="queue container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="card p-3 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4"><span class="title-highlight">서비스 접속 대기중</span>입니다.</h2>
+                        <h4 class="text-end mb-4">예상 대기 시간: <span id="waitingTime">0분 0초</span></h4>
+                        <div class="progress mb-3">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="rounded bg-light p-2 text-center">
+                            고객님 앞에 <span id="waitingCount">0</span>명의 대기자가 있습니다. <br>
+                            현재 접속자가 많아 대기중이며, <br>
+                            잠시만 기다리시면 서비스로 자동 접속 됩니다. <br>
+                            <span class="warning">※ 재접속하시면 대기시간이 더 길어집니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 공통 스크립트-->
+<!-- Bootstrap core JavaScript-->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="/vendor/chart.js/Chart.min.js"></script>
+
+<!--  DataTable  -->
+<script src="/vendor/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+<script src="../js/course-registration.js"></script>
+
+<!-- Page level custom scripts -->
+<!--    <script th:src="@{/js/demo/chart-area-demo.js}"></script>-->
+<!--    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>-->
+</body>
+</html>
+
+
