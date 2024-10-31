@@ -108,7 +108,7 @@
 <script>
     async function loadWishlist() {
         const accessToken = localStorage.getItem('[accessToken]');
-        const response = await fetch('http://localhost:8000/api/lecture/wishlist', {
+        const response = await fetch('http://localhost:8000/api/lectures/wishlist', {
             headers: {
                 'Authorization': `Bearer [accessToken]`,
                 'studentId' : '5'
@@ -169,7 +169,7 @@
                 if (lectureId) {
                     try {
                         const accessToken = localStorage.getItem('[accessToken]');
-                        const response = await fetch(`http://localhost:8000/api/lecture/delete/${lectureId}`, {
+                        const response = await fetch(`http://localhost:8000/api/lectures/delete/${lectureId}`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -200,7 +200,7 @@
     // wishlistId로 lectureId를 조회하는 함수
     async function getLectureIdByWishlistId(wishlistId) {
         try {
-            const response = await fetch(`http://localhost:8000/api/lecture/findLectureIdByWishlistId/${wishlistId}`, {
+            const response = await fetch(`http://localhost:8000/api/lectures/findLectureIdByWishlistId/${wishlistId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -239,7 +239,7 @@
 
                 try {
                     const accessToken = localStorage.getItem('[accessToken]');
-                    const response = await fetch(`http://localhost:8000/api/lecture/updatePriority/${lectureId}`, {
+                    const response = await fetch(`http://localhost:8000/api/lectures/updatePriority/${lectureId}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
